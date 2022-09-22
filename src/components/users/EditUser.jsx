@@ -26,6 +26,7 @@ function EditUser() {
   
         },
         onSubmit: async (values)=>{
+          console.log(values)
           await axios.put(`https://62a822d1a89585c1770d0eea.mockapi.io/api/v1/users/${params.id}`,values)
           alert("User Updated")
           navigate("/portal/users")

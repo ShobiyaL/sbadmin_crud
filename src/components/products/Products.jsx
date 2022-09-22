@@ -23,10 +23,11 @@ function Products (){
         let ask =window.confirm("Are You Sure?Do You Want To Delete This Data")
         if(ask){
         let product = await axios.delete(`https://62a822d1a89585c1770d0eea.mockapi.io/api/v1/products/${id}`);
+        console.log(product);
         // loadData()
-        let index = product.find((obj)=>obj.id===id)
-        product.splice(index,1)
-        setProducts([...product])
+        let index = products.findIndex((obj)=>obj.id===id)
+        products.splice(index,1)
+        setProducts([...products])
         }
       }catch(error){
   
