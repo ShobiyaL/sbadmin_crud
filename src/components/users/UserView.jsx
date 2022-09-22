@@ -1,7 +1,7 @@
 import React,{useEffect,useState} from 'react'
 import {useParams,useSearchParams,useNavigate} from "react-router-dom"
 import axios from "axios";
-import {env} from "../../config";
+
 
 const UserView = () => {
   const navigate=useNavigate();
@@ -17,7 +17,7 @@ const UserView = () => {
 
      let loadUser = async ()=>{
         try{
-          let user = await axios.get(`${env.api}/users/${params.id}`)
+          let user = await axios.get(`https://62a822d1a89585c1770d0eea.mockapi.io/api/v1/users/${params.id}`)
           setSingleUser(user.data);
         }catch(error){
            
