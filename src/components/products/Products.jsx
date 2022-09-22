@@ -1,18 +1,23 @@
 import React,{useState,useEffect} from "react";
-import axios from "axios"
 import {Link} from "react-router-dom"
+import axios from "axios"
+
 
 function Products (){
    const [products,setProducts]=useState([]);
+   const [isLoading,setLoading]=useState(false);
   useEffect(()=>{
     loadProducts();
-  })
+  },[]);
 
     let loadProducts = async()=>{
+      setLoading(true);
       let products = await axios.get("https://62a822d1a89585c1770d0eea.mockapi.io/api/v1/products");
       
+      
       setProducts(products.data);
-    }
+      setLoading(false);
+    };
     let productDelete = async(id)=>{
       try{
         let ask =window.confirm("Are You Sure?Do You Want To Delete This Data")
@@ -43,7 +48,9 @@ function Products (){
             </Link>
           </div>
         </div>
-
+{
+  isLoading ? <span>Loading...</span>
+:
   <div class="card-body">
           <div class="table-responsive">
             <table
@@ -91,7 +98,8 @@ function Products (){
               </tbody>
             </table>
           </div>
-        </div>  
+        </div> 
+} 
       </div>
     </div>   
     )

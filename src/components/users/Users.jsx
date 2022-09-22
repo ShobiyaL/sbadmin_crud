@@ -25,9 +25,9 @@ export default function Users() {
       if(ask){
       let user = await axios.delete(`https://62a822d1a89585c1770d0eea.mockapi.io/api/v1/users/${id}`);
       // loadData()
-      let index = user.find((obj)=>obj.id===id)
-      user.splice(index,1)
-      setUsers([...user])
+      let index = users.findIndex((obj)=>obj.id===id)
+      users.splice(index,1)
+      setUsers([...users])
       }
     }catch(error){
 
