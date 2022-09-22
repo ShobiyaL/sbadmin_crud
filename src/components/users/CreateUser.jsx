@@ -2,7 +2,7 @@ import React from "react";
 import { useFormik } from 'formik';
 import {useNavigate} from 'react-router-dom'
 import axios from "axios";
-
+import {env} from "../../config";
 
 export default function CreateUser (){
   const navigate =useNavigate();
@@ -25,7 +25,7 @@ export default function CreateUser (){
 
       },
       onSubmit:async (values)=>{
-        let user=await axios.post("https://62a822d1a89585c1770d0eea.mockapi.io/api/v1/users",values)
+        let user= await axios.post(`${env.api}/users`,values)
         alert("User Created Successfully")
         
         navigate("/portal/users")

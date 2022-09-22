@@ -22,7 +22,7 @@ export default function CreateProduct (){
 
       },
       onSubmit:async (values)=>{
-        let product=await axios.post("https://62a822d1a89585c1770d0eea.mockapi.io/api/v1/users",values)
+        let product=await axios.post("https://62a822d1a89585c1770d0eea.mockapi.io/api/v1/products",values)
         alert("Product Created Successfully")
         
         navigate("/portal/products")

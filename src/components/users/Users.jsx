@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { env } from "../../config";
+
 export default function Users() {
   const [users, setUsers] = useState([]);
   const [isLoading,setLoading]=useState(false);
@@ -12,22 +14,23 @@ export default function Users() {
   let loadData = async () => {
     setLoading(true)
     let users = await axios.get(
-      "https://62a822d1a89585c1770d0eea.mockapi.io/api/v1/users"
+      `${env.api}/users?limit=100&offset=0`
     );
 
     setUsers(users.data)
     setLoading(false)
   };
   
-  let userDelete = async(id)=>{
+  let userDelete = async (id)=>{
     try{
       let ask =window.confirm("Are You Sure?Do You Want To Delete This Data")
       if(ask){
-      let user = await axios.delete(`https://62a822d1a89585c1770d0eea.mockapi.io/api/v1/users/${id}`);
-      // loadData()
-      let index = user.find((obj)=>obj.id===id)
-      user.splice(index,1)
-      setUsers([...user])
+      let user = await axios.delete(`${env.api}/users/${id}`);
+      
+      let index = users.findIndex((obj)=>obj.id===id)
+      users.splice(index,1)
+      setUsers([...users])
+      // loadData();
       }
     }catch(error){
 
@@ -86,18 +89,18 @@ export default function Users() {
                     <td>${item.salary}</td>
                     <td>
                       <Link
-                        to={`/portal/users/${item.id}`}
+                        to={`/portal/users/${item._id}`}
                         className="btn btn-sm btn-info mr-2"
                       >
                         View
                       </Link>
                       <Link
-                        to={`/portal/user/edit/${item.id}`}
+                        to={`/portal/user/edit/${item._id}`}
                         className="btn btn-sm btn-primary mr-2"
                       >
                         Edit
                       </Link>
-                      <button  onClick={()=>userDelete(item.id)} className="btn btn-sm btn-danger mr-2">
+                      <button  onClick={()=>userDelete(item._id)} className="btn btn-sm btn-danger mr-2">
                         Delete
                       </button>
                     </td>
